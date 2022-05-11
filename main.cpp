@@ -5,6 +5,8 @@
 
 using namespace std;
 
+static void clear_screen();
+
 unordered_set<string>PlainTypes{
     "string", "int", "float", "double", "bool",
     "unsigned long long", "long long", "short",
@@ -139,7 +141,7 @@ int main()
         deCapitalizeFirstLetter(Name);
 
         vars.push_back(make_pair(Type,Name));
-        system("CLS");
+        clear_screen();
     }while(1);
     string filename;
     cout << "\n\nEnter Filename for class creation:\n";
@@ -173,3 +175,14 @@ int main()
     code << "int main()\n";
     code << "{\n" + s(4) + "return 0;\n" + "}\n";
 }
+
+#ifdef __unix__
+    static void clear_screen() {
+        system("clear");
+    }
+#else
+    static void clear_screen() {
+        system("CLS");
+    }
+#endif
+
